@@ -1,0 +1,49 @@
+-- Batavian Staker --
+
+-- This is Mariana Lava, more dangereous than other.
+-- Support general dice sites, that run on Chance 5
+-- Minimal splitter is 0.001, increase it if bet too low
+-- The higher the splitter, the higher your risk to lose
+-- If you want to more lower basebet, increase divider amount
+
+-- Remember, "Gambling is gambling...
+--...no matter what you do or how good your strategy is...
+--...The house is always wins.
+--...Winner know when to stop".
+
+-- Seuntjie
+
+-- Minimal splitter is 0.001
+-- Deault divider is 1000000
+splitter = 0.001
+divider  = 1000000
+target   = 100-- Coin
+
+-------------------------------------------
+
+if (splitter < 0.001) then print("Set splitter to default or higher, then re-start") stop() end
+
+base    = balance * (splitter / divider)
+curbet  = base * 1.1
+nextbet = base
+tprofit = balance + target
+
+function dobet()
+    chance  = math.random(5,6)
+    bethigh = math.random(0,100)%2==0
+
+    if (win) then
+        nextbet = base
+        resetseed()
+    else
+        nextbet = previousbet * 1.1
+        resetseed()
+    end
+
+if(balance >= tprofit) then stop()
+print("Congratulations, You are survived!")
+
+
+end 
+
+end

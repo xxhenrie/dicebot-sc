@@ -1,0 +1,113 @@
+-- Rain Purnama --
+
+-- Modalmu harus diatas 1 doge gan
+-- Makin gede modalmu makin cepet profitmu
+-- Semakin banyak los semakin gede profitmu
+-- kalua Los 7 segera off bot main lagi nanti aja
+-- Sehari main 3 kali aja (1 kali main 30 menit saja)
+-- Sayangi duit mu, profit dikit lebih baik timbang hilang semua modalmu
+-- Ini adalah Permainan Bisa Menang Bisa Kalah !!!
+-- UBAH betcalc SESUAI ATURAN KALIAN JANGAN COBA PILIH BET 1000
+
+-- 11 max losses (ngeri) - 50
+-- 13 max losses (mendinglah) - 25
+-- 15 max losses (resiko kalah yen di tinggal ngopi) - 12.5
+-- 18 max losses (aman iso ditingal neng wc)  - 6.00
+-- 20 max losses (iso ditingal turu dilik) - 2.00
+-- 21 max losses (aku iso nyantai) - 1.562
+-- 24 max losses (aku iso mandek dag dig dug modal gedi) - 0.78
+-- 23 max losses (aku sangat tampa dag dig dug modal gedi) - 0.39
+
+betcalc = 0.39
+
+-------------------------------------------
+
+
+nextbet = 0.000005
+
+chance = 95
+
+basebet = balance * (betcalc / 100000)
+
+bethigh = true
+
+losecount = 0
+
+target = 120 -- Doge
+tprofit = balance + target
+
+
+function dobet()
+
+
+if(balance >= tprofit) then stop()
+print("Kalau Sudah Opit 100k Doge :v GA lah GA")
+
+
+end
+
+if (win) then
+chance = math.random(78,95)
+
+   nextbet = basebet
+
+   losecount = 0
+
+end
+
+if (!win) then
+
+   losecount += 1
+
+   if (losecount > 1) then
+
+      nextbet = previousbet*1.7
+
+   chance = (1/(((nextbet+(nextbet-basebet))/nextbet)))*60
+
+   if chance < 30.44 then
+
+   chance = 30.44 end
+
+   bethigh = !bethigh
+
+   print ("Temukan Loss Biar Dapat Jackpot")
+
+   print(nextbet)
+
+   print(chance)
+
+   print(profit)
+
+   print(bets)
+
+   else
+
+      nextbet = previousbet*1.5
+
+   chance = (1/(((basebet+nextbet))/nextbet))*100
+
+      if chance<49.5 then
+
+   chance=49.5 end
+
+   bethigh = !bethigh
+
+   print ("Temukan Loss Biar Dapat Jackpot")
+
+   print(nextbet)
+
+   print(chance)
+
+   print(profit)
+
+   print(bets)
+
+ end
+
+ end
+
+  
+
+end
+

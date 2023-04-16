@@ -1,0 +1,70 @@
+chance    = 41.25
+base      = 0.01
+nextbet   = base
+bethigh   = false
+p         = 0
+l         = 0
+chenhlech = 0
+wincount  = 0
+losecount = 0
+a         = 0
+b         = 0
+c         = 0
+d         = 1.25
+multi     = 0.45
+target    = balance+0.1
+
+function dobet()
+
+chenhlech = p-l
+
+if balance > 20000 then stop() end
+    if wincount==16 then
+        wincount=0
+        resetseed()
+end
+if currentprofit > 0 then
+    p+= currentprofit
+ else
+    l-= currentprofit
+end
+if p>l then
+    a      = 0
+    b      = 0
+    c      = 0
+    d      = 1.25
+    base   = 0.01
+    chance = math.random(20.75*100,30.21*100)/100
+    multi  = 0.45  
+    wincount+=1
+    bethigh=!bethigh
+    p=0
+    l=0
+    nextbet = base
+ else
+    if !win then
+        nextbet = previousbet*multi
+        losecount+=1
+    else
+        nextbet = base
+        losecount = 0
+    end
+    if losecount == 7 then
+    chance=math.random(5*100,9*100)/100
+    multi+=c
+    base*=d
+    d+=0.0000001
+    nextbet = base
+    losecount = 0
+    a+=1
+    end
+end
+
+print(" ")
+print("target: "..target)
+print("chenh lech: "..chenhlech)
+print("Cap so nhan: "..d)
+print("multi: "..multi)
+print(" ")
+end
+end

@@ -1,0 +1,38 @@
+-- Batavian Staker
+
+-- This is Mariana Lava, more dangereous than other.
+-- Support general dice sites
+-- Minimal coin is 1, default splitter is 0.04
+-- Only support up to 154 lose streak as default
+
+splitter = 0.0002
+
+-------------------------------------------
+
+if (splitter < 0.001) then print("Silakan atur betcalc kemudian restart skrip") stop() end
+
+base    = balance * (splitter / 1000000)
+curbet  = base * 1.1
+nextbet = base
+target  = 100-- Coin
+tprofit = balance + target
+
+function dobet()
+    chance  = math.random(5,6)
+    bethigh = math.random(0,100)%2==0
+
+    if (win) then
+        nextbet = base
+        resetseed()
+    else
+        nextbet = previousbet * 1.1
+        resetseed()
+    end
+
+if(balance >= tprofit) then stop()
+print("Selamat jajan paha :v")
+
+
+end 
+
+end

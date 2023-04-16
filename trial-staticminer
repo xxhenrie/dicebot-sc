@@ -1,0 +1,65 @@
+
+betcalc = 0.2
+
+-------------------------------------------
+
+bethigh = false
+stopnow = false
+first   = true
+done    = true
+chance  = 20
+
+if (betcalc < 0.01) then print("Silakan atur betcalc kemudian restart skrip") stop() end
+
+base    = balance * (betcalc / 100000)
+curbet  = base * 1.35
+nextbet = base
+target  = 100-- Coin
+tprofit = balance + target
+
+function dobet()
+
+if(balance >= tprofit) then stop()
+print("Selamat jajan paha :v")
+
+
+end 
+
+ base = balance * (betcalc / 100000)
+
+  if (first) then
+    if(stopnow) then stop() end
+    if !Win then
+        chance = math.random(20,25)
+        resetseed()
+bethigh=!bethigh
+
+
+      nextbet = curbet
+      first   = false
+      done    = true
+    end
+  end
+
+  if(!first and !done) then
+    if(stopnow) then stop() end
+    if win then
+        chance = math.random(20,25)
+        resetseed()
+      curbet  = base * 1.35
+      nextbet = base
+      first   = true
+      done    = true
+      
+
+    else
+      curbet = curbet * 6.2
+      chance = math.random(80,85)
+      resetseed()
+bethigh=!bethigh
+
+
+    end
+  end
+  done = false
+end

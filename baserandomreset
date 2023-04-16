@@ -1,0 +1,14 @@
+basebet = 0.00000002
+
+function dobet()
+    chance  = math.random(1,95)
+    bethigh = math.random(0,100)%2==0
+if (win) then
+    nextbet = basebet
+    resetseed()
+else
+    nextbet = previousbet * 10
+    resetseed()
+end
+
+end

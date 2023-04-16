@@ -1,0 +1,138 @@
+chance = 58
+betfactor=0.00006
+base=balance*betfactor 	-->> 50 Sats BB at 0.01 BTC Bankroll, Auto Adjust to Increasing Bankroll
+prebet = 0.01
+multiplier=2.29999999	-- >> 11.11% Increase on Lose 
+
+target=4520.00100000		-- <<Stop at this Profit Target>>
+
+nextbet = prebet
+losecount = 0
+betcount = 0
+bethigh=false
+wincount=0
+highloss=0
+totalloss=0
+total=0
+avehit=0
+counter=0
+b=0
+
+low=0
+high=0
+
+--resetstats()
+resetseed()
+
+function dobet()
+
+if (lastBet.roll < chance) then
+	low += 1
+end
+
+if (lastBet.roll > (100 - chance)) then
+	high += 1
+end 
+
+      print(" ")
+      print("Total Bet : "..betcount)
+      print("Current Streak Loss : "..losecount)
+      print("Highest Loss Streak : "..highloss)
+      print("Number of Wins : "..wincount)
+      print("Average Losses Before Win : "..string.format("%.2f",avehit))
+      print("Profit :"..string.format("%.8f",profit))
+      print(" ")
+      print("Bet Amount :"..string.format("%.8f",nextbet))
+      print("Current Balance : "..string.format("%.8f",balance))
+      print("High :"..high.." / ".."Low :"..low)
+      print(" ")
+
+        if counter > 500 then
+	resetseed()
+	low=0
+	high=0
+	counter=0
+       else
+	counter+=1
+        end
+
+   if win then
+        base=balance*betfactor
+        nextbet = prebet
+        wincount+=1
+        total+=1
+        totalloss+=losecount
+        avehit=totalloss/total
+        losecount = 0
+        betcount += 1
+	b+=1
+
+        if b>1 then
+		bethigh=!bethigh
+		b=0
+	end
+
+        if profit>target then
+	stop()
+	print("TARGET REACHED!")
+        end
+
+   else
+
+         losecount += 1
+         betcount += 1
+         nextbet = prebet
+
+   end
+
+if losecount > highloss then
+	highloss = losecount
+end
+
+   if (losecount > 3) then
+      nextbet = 0.0833
+
+   end
+   if (losecount > 4) then
+      nextbet = 0.4315
+   end
+
+  if (losecount > 5) then
+      nextbet = 1.94
+   end 
+
+  if (losecount > 6) then
+      nextbet = 5.82
+   end 
+
+  if (losecount > 7) then
+      nextbet = 25.93
+   end  
+
+  if (losecount > 8) then
+      nextbet = 75.93
+   end  
+
+  if (losecount > 9) then
+      nextbet = 180.93
+   end  
+
+  if (losecount > 10) then
+      nextbet = 377.93
+   end  
+
+  if (losecount > 11) then
+      nextbet = 628.93
+   end   
+
+  if (losecount > 12) then
+      nextbet = balance*betfactor
+      if nextbet<935.99 then
+	nextbet=937.99
+      end
+   end
+
+   if (losecount > 13) then
+      nextbet = previousbet*multiplier
+   end
+  end

@@ -1,0 +1,116 @@
+-- Rain Purnama --
+
+-- Modalmu harus diatas 1 doge gan
+-- Makin gede modalmu makin cepet profitmu
+-- Semakin banyak los semakin gede profitmu
+-- kalua Los 7 segera off bot main lagi nanti aja
+-- Sehari main 3 kali aja (1 kali main 30 menit saja)
+-- Sayangi duit mu, profit dikit lebih baik timbang hilang semua modalmu
+-- Ini adalah Permainan Bisa Menang Bisa Kalah !!!
+
+-- UBAH betcalc SESUAI ATURAN KALIAN JANGAN COBA PILIH BET 1000
+
+-- 14 max losses ( Ngeri )  - 6.25
+-- 15 max losses ( Mendinglah ) - 3.125
+-- 16 max losses ( Sambil Ngerokok Dan Ngopi ) - 1.562
+-- 17 max losses ( Resiko Kalah Tinggal Ngopi ) - 0.78
+-- 18 max losses ( Di Tinggal Ke WC ) - 0.39
+-- 19 max losses ( Di tinggal Mau Mandi ) - 0.2
+-- 20 Max Losses ( Di Tinggal Pacaran ) - 0.11
+-- 21 Max Losses ( Aman Banget Di Tinggal Seharian ) - 0.07
+-- 25 Max Losses ( Di Tinggal Liburan Ke Luar Nergi ) -0.01
+
+betcalc = 0.07
+
+-------------------------------------------
+
+
+nextbet = 0.000005
+
+chance = 95
+
+basebet = balance * (betcalc / 100000)
+
+bethigh = true
+
+losecount = 0
+
+target  = 100-- Doge
+tprofit = balance + target  
+
+function dobet()
+
+
+if(balance >= tprofit) then stop()
+print("Target Sudah Sesuai Dengan Modal :v GA lah GA")
+
+
+end
+
+if (win) then
+chance = math.random(88,95)
+
+   nextbet = basebet
+
+   losecount = 0
+
+end
+
+if (!win) then
+
+   losecount += 1
+
+   if (losecount > 1) then
+
+      nextbet = previousbet*2.03
+
+   chance = (1/(((nextbet+(nextbet-basebet))/nextbet)))*75
+
+   if chance < 37.37 then
+
+   chance = 37.37 end
+
+   bethigh = !bethigh
+
+      print ("Temukan Loss Sebanyak Yang Kau Mau")
+
+   print(nextbet)
+
+   print(chance)
+
+   print(profit)
+
+   print(bets)
+
+   else
+
+      nextbet = previousbet*1.5
+
+   chance = (1/(((basebet+nextbet))/nextbet))*100
+
+      if chance<49.55 then
+
+   chance=49.55 end
+
+   bethigh = !bethigh
+
+   print ("Temukan Loss Sebanyak Yang Kau Mau")
+
+   print(nextbet)
+
+   print(chance)
+
+   print(profit)
+
+   print(bets)
+
+ end
+
+ end
+
+  
+
+end
+
+
+
